@@ -14,25 +14,15 @@ namespace DiabloMod {
 
         public override bool InstancePerEntity => true;
 
-        // update tooltip with item quality
-
-        /*
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if(ItemQualityData.Instance.ItemQualityMap.ContainsKey(item.type)) {
-                float quality = ItemQualityData.Instance.ItemQualityMap[item.type];
-                tooltips.Add(new TooltipLine(Mod, "Quality", $"Quality: {quality * 100}%"));
-            }
-        }
-        */
-
         // updated version of tooltip method
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
             if(item.damage > 0 || item.defense > 0) {
+                QualityRandomizer(item);
                 if (ItemQualityData.Instance.TryGetQuality(item.type, out float quality)) {
                     // calculates new damage value based on quality
-                    item.damage = (int)(item.damage * (quality * 2));
+                    item.damage = (int)(item.damage * (quality * 2));                   
+                    ItemQualityData.Instance.SetQuality(item.type, quality);
 
                     // calculates new armor value based on quality
                     if (item.defense > 0) {
