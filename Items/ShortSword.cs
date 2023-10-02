@@ -24,7 +24,7 @@ namespace DiabloMod.Items
 			Item.useStyle = 1;
 			Item.knockBack = 6;
 			Item.value = 10000;
-			Item.rare = 2;
+			Item.rare = ItemRarityID.White;
 			Item.UseSound = SoundID.Item1;
 			Item.autoReuse = true;
 		}
@@ -36,5 +36,7 @@ namespace DiabloMod.Items
 			recipe.AddTile(TileID.WorkBenches);
 			recipe.Register();
 		}
+
+
 	}
 }
