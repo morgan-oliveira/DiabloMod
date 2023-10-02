@@ -1,0 +1,2 @@
+Diablo Mod ARPG is a mod that changes the gameflow completely by adding Diablo-like mechanics such as
+NG+ with new difficulties, item quality, rarity and set bonus, as well as adding enemy modifiers.

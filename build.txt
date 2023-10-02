@@ -1,0 +1,3 @@
+displayName = Diablo Mod ARPG
+author = KhaosMod
+version = 0.1
