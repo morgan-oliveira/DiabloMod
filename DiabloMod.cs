@@ -12,10 +12,8 @@ namespace DiabloMod
         public override void Load()
         {
             GlobalItem globalItem = new Weapon();
-            GlobalItem qualityGlobal = new Quality();
-            
+            GlobalItem qualityGlobal = new QualitySystem();
 
         }
-
     }
 }

@@ -33,6 +33,8 @@ namespace DiabloMod.Items {
             else {
                 ItemQualityMap.Add(itemType, quality);
             }
-        }        
+        }     
+        // another setter
+           
     }
 }
