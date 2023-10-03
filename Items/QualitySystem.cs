@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace DiabloMod.Items {
     public class QualitySystem : GlobalItem {
-        private const float PreHardmodeQualityMax = 0.9f;
+        private const int PreHardmodeQualityMax = 90;
 
         public override bool InstancePerEntity => true;
 
@@ -14,41 +14,41 @@ namespace DiabloMod.Items {
         {
             if (item.damage > 0 || item.defense > 0) {
                 AssignQualityIfNeeded(item);
-                float quality = GetQuality(item);
+                int quality = GetQuality(item);
                 ModifyItemStats(item, quality);
                 AddQualityTooltip(item, quality, tooltips);
             }
         }
-        private float GetQuality(Item item) {
-            if (ItemQualityData.Instance.TryGetQuality(item.type, out float quality)) {
+
+        
+        private int GetQuality(Item item) {
+            if (ItemQualityData.Instance.TryGetQuality(item.type, out int quality)) {
                 return quality;
             }
-            return 0f;
+            return 0;
         }
         private void AssignQualityIfNeeded(Item item) {
             if (!ItemQualityData.Instance.ItemQualityMap.ContainsKey(item.type)) {
-                float qualityValue = QualityCalculation(item);
+                int qualityValue = QualityCalculation(item);
                 ItemQualityData.Instance.ItemQualityMap[item.type] = qualityValue;
             }
         }
-        private void ModifyItemStats(Item item, float quality) {
-            item.damage = (int)(item.damage * (quality * 2));
+        private void ModifyItemStats(Item item, int quality) {
+            item.damage = (item.damage * (quality * 2));
             if (item.defense > 0) {
                 item.defense = (int)(item.defense * (quality * 0.5));
             }
         }
-        private void AddQualityTooltip(Item item, float quality, List<TooltipLine> tooltips) {
+        private void AddQualityTooltip(Item item, int quality, List<TooltipLine> tooltips) {
 
-            // rounding numbers
-            int decimalPlaces = 1;
-            float roundedQuality = (float)Math.Round(quality, decimalPlaces);
-
-            TooltipLine qualityTooltip = new TooltipLine(Mod, "Quality", $"Quality: {roundedQuality * 100:F}%");
+            TooltipLine qualityTooltip = new TooltipLine(Mod, "Quality", $"Quality: {quality}%");
             qualityTooltip.OverrideColor = new Color(255, 255, 0);
             tooltips.Add(qualityTooltip);
         }
-        private float QualityCalculation(Item item) {
-            return Main.rand.NextFloat(0.0f, PreHardmodeQualityMax);
+        private int QualityCalculation(Item item) {
+            int minQuality = 0;
+            int randomQuality = Main.rand.Next(minQuality, PreHardmodeQualityMax + 1);
+            return randomQuality;
         }
 
     }
